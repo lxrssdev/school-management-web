@@ -34,7 +34,7 @@ public class StudentController {
     public String showStudents(Model model) {
         //list all students
         model.addAttribute("title", "Students");
-        model.addAttribute("studens", service.listStudents());
+        model.addAttribute("students", service.listStudents());
         return "students";
     }
 
