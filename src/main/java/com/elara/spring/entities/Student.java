@@ -86,4 +86,7 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getFullName(){
+        return name + " " + lastname;
+    }
 }

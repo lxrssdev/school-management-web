@@ -2,13 +2,19 @@ package com.elara.spring.controllers;
 
 import com.elara.spring.entities.Student;
 import com.elara.spring.services.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller()
 @RequestMapping("/dashboard")
+@SessionAttributes({"student"})
 public class StudentController {
 
     private final StudentService service;
@@ -32,11 +38,51 @@ public class StudentController {
         return "students";
     }
 
-    @GetMapping("/create-form")
+    @GetMapping("/create-student")
     public String showCreateForm(Model model) {
         model.addAttribute("title", "Create Student");
-        model.addAttribute("student", new Student()); //empty object for thymeleaf
+        model.addAttribute("student", new Student()); //empty object for thymeleaf form
         return "form";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Optional<Student> student = service.getStudentById(id);
+        if(student.isPresent()) {
+            model.addAttribute("student", student.get());
+            model.addAttribute("title", "Editar estudiante");
+            return "form";
+        }else{
+            return "redirect:/students";
+        }
+    }
+
+    @PostMapping
+    public String processForm(@Valid Student student, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
+        if(result.hasErrors()) {
+            model.addAttribute("title", "Crear estudiante");
+            return "form";
+        }
+        String message = (student.getId() > 0)
+                ? "Estudiante " + student.getFullName() + "actualizado con éxito!"
+                : "Estudiante " + student.getFullName() + "creado con éxito!";
+        service.saveStudent(student);
+        status.setComplete();
+        redirect.addFlashAttribute("success", message);
+        return "redirect:/students";
+    }
+
+    @GetMapping("/delete-student/{id}")
+    public String deleteStudent(@PathVariable Long id, Model model, RedirectAttributes redirect) {
+        Optional<Student> student = service.getStudentById(id);
+        if(student.isPresent()) {
+            service.deleteStudentById(id);
+            String message = "Estudiante " + student.get().getFullName() + " eliminado con éxito";
+            redirect.addFlashAttribute("success", message);
+        }else{
+            redirect.addFlashAttribute("error", "Estudiante con id " + id + " no encontrado!");
+        }
+        return "redirect:/students";
     }
 
 
