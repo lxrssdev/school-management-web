@@ -17,6 +17,67 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-mortarboard-fill"></i> SIGE
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">
+                        <i class="bi bi-house-door"></i> Inicio
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-people-fill"></i> Administración
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" th:href="@{/estudiantes}">Estudiantes</a></li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/profesores}">Profesores</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/usuarios}">Usuarios del Sistema</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/asignaturas}">
+                        <i class="bi bi-book"></i> Asignaturas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/calificaciones}">
+                        <i class="bi bi-clipboard-data"></i> Calificaciones
+                    </a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                       id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://via.placeholder.com/30" alt="Perfil" width="30" height="30" class="rounded-circle me-2">
+                        <span th:text="${#authentication.principal.username}">Usuario</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Configuración</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <button class="dropdown-item" type="submit">Cerrar sesión</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex">
 <div class="d-flex">
     <!-- Sidebar -->
     <nav class="sidebar p-3" style="width: 250px;">
