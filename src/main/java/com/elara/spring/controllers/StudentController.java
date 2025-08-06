@@ -53,7 +53,8 @@ public class StudentController {
             model.addAttribute("title", "Editar estudiante");
             return "form";
         }else{
-            return "redirect:/students";
+            return "redirect:/dashboard/students";
+
         }
     }
 
@@ -69,7 +70,8 @@ public class StudentController {
         service.saveStudent(student);
         status.setComplete();
         redirect.addFlashAttribute("success", message);
-        return "redirect:/students";
+        return "redirect:/dashboard/students";
+
     }
 
     @GetMapping("/delete-student/{id}")
