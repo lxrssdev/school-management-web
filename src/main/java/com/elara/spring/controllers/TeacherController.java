@@ -3,11 +3,13 @@ package com.elara.spring.controllers;
 import com.elara.spring.entities.Teacher;
 import com.elara.spring.services.TeacherService;
 import jakarta.servlet.ServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -19,13 +21,6 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping
-    public String showDashboard(Model model) {
-        //show dashboard
-        model.addAttribute("title", "Dashboard");
-        return "dashboard";
-    }
-
     @GetMapping("/teachers")
     public String showTeachers(Model model, ServletRequest servletRequest){
         //list all teachers
@@ -34,6 +29,7 @@ public class TeacherController {
         return "teachers";
     }
 
+
     @GetMapping("/create-teacher")
     public String showCreateForm(Model model) {
         model.addAttribute("title", "Agregar Maestro");
@@ -41,6 +37,27 @@ public class TeacherController {
         return "form";
     }
 
+    @GetMapping("/form-create")
+    public String formCreate(Model model){
+        model.addAttribute("title", "Formulario | Creación de maestros!");
+        model.addAttribute("teacher", new Teacher());
+        return "form";
+    }
+
+    @PostMapping("/dashboard/teachers")
+    public String processFormCreate(@Valid Teacher teacher, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
+        if(result.hasErrors()) {
+            model.addAttribute("title", "Formulario en validación | Completa los campos");
+            return "form";
+        }
+        String message = (teacher.getId() != null && teacher.getId() > 0)
+                ? "Maestro "+ teacher.getFullName() + " actualizado correctamente"
+                : "Maestro " + teacher.getFullName() + " creado correctamente";
+        teacherService.save(teacher);
+        status.setComplete();
+        redirect.addFlashAttribute("success", message);
+        return "redirect:/dashboard/teachers";
+    }
 
 
 }
