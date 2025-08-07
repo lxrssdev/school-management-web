@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title th:text="${title}"></title>
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<div class="container my-4">
+  <h3 th:text="${title}"></h3>
+  <a th:href="@{/dashboard/teachers}" th:text="'Agregar maestro nuevo'" class="btn btn-primary"></a>
+  <div th:text="'Parece que no hay maestros en la base de datos! 😥'" th:if="${#lists.isEmpty(teachers)}"></div>
+  <table class="table table-hover table-striped" th:if="${not #lists.isEmpty(teachers)}">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Materia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="teacher : ${teachers}">
+        <th th:text="${teacher.id}"></th>
+        <th th:text="${teacher.fullName}"></th>
+        <th th:text="${teacher.email}"></th>
+        <th th:text="${teacher.subject}"></th>
+        <th><a class="btn btn-warning" th:href="@{/dashboard/form-update/} + ${teacher.id} ">Editar</a></th>
+        <th><a class="btn btn-danger" th:href="@{/dashboard/form-delete/} + ${teacher.id}"
+               onclick="return confirm('Estas seguro de querer eliminar un maestro?')">Eliminar</a></th>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

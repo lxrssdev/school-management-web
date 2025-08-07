@@ -2,6 +2,7 @@ package com.elara.spring.controllers;
 
 import com.elara.spring.entities.Student;
 import com.elara.spring.services.StudentService;
+import com.elara.spring.services.TeacherService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,13 @@ import java.util.Optional;
 @Controller()
 @RequestMapping("/dashboard")
 @SessionAttributes({"student"})
-public class RestController {
+public class StudentController {
 
-    private final StudentService service;
+    private final StudentService studentService;
 
-    public RestController(StudentService service) {
-        this.service = service;
+
+    public StudentController(StudentService service, TeacherService teacherService) {
+        this.studentService = service;
     }
 
     @GetMapping
@@ -33,8 +35,8 @@ public class RestController {
     @GetMapping("/students")
     public String showStudents(Model model) {
         //list all students
-        model.addAttribute("title", "Students");
-        model.addAttribute("students", service.listStudents());
+        model.addAttribute("title", "Lista de estudiantes");
+        model.addAttribute("students", studentService.listStudents());
         return "students";
     }
 
@@ -47,7 +49,7 @@ public class RestController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Student> student = service.getStudentById(id);
+        Optional<Student> student = studentService.getStudentById(id);
         if(student.isPresent()) {
             model.addAttribute("student", student.get());
             model.addAttribute("title", "Editar estudiante");
@@ -67,7 +69,7 @@ public class RestController {
         String message = (student.getId() > 0)
                 ? "Estudiante " + student.getFullName() + "actualizado con éxito!"
                 : "Estudiante " + student.getFullName() + "creado con éxito!";
-        service.saveStudent(student);
+        studentService.saveStudent(student);
         status.setComplete();
         redirect.addFlashAttribute("success", message);
         return "redirect:/dashboard/students";
@@ -76,9 +78,9 @@ public class RestController {
 
     @GetMapping("/delete-student/{id}")
     public String deleteStudent(@PathVariable Long id, Model model, RedirectAttributes redirect) {
-        Optional<Student> student = service.getStudentById(id);
+        Optional<Student> student = studentService.getStudentById(id);
         if(student.isPresent()) {
-            service.deleteStudentById(id);
+            studentService.deleteStudentById(id);
             String message = "Estudiante " + student.get().getFullName() + " eliminado con éxito";
             redirect.addFlashAttribute("success", message);
         }else{
