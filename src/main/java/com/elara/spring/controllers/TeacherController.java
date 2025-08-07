@@ -18,13 +18,6 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping
-    public String showDashboard(Model model) {
-        //show dashboard
-        model.addAttribute("title", "Dashboard");
-        return "dashboard";
-    }
-
     @GetMapping("/teachers")
     public String showTeachers(Model model, ServletRequest servletRequest){
         //list all teachers
