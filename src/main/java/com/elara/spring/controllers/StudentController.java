@@ -60,7 +60,7 @@ public class StudentController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/dashboard/students")
     public String processForm(@Valid Student student, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
         if(result.hasErrors()) {
             model.addAttribute("title", "Crear estudiante");
