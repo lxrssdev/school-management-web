@@ -44,7 +44,7 @@ public class StudentController {
     public String showCreateForm(Model model) {
         model.addAttribute("title", "Agregar Estudiante");
         model.addAttribute("student", new Student()); //empty object for thymeleaf form
-        return "form";
+        return "formTeacher";
     }
 
     @GetMapping("/edit/{id}")
@@ -53,7 +53,7 @@ public class StudentController {
         if(student.isPresent()) {
             model.addAttribute("student", student.get());
             model.addAttribute("title", "Editar estudiante");
-            return "form";
+            return "formTeacher";
         }else{
             return "redirect:/dashboard/students";
 
@@ -64,7 +64,7 @@ public class StudentController {
     public String processForm(@Valid Student student, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
         if(result.hasErrors()) {
             model.addAttribute("title", "Crear estudiante");
-            return "form";
+            return "formTeacher";
         }
         String message = (student.getId() > 0)
                 ? "Estudiante " + student.getFullName() + "actualizado con éxito!"
