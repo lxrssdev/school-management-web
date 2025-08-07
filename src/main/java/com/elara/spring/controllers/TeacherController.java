@@ -1,5 +1,6 @@
 package com.elara.spring.controllers;
 
+import com.elara.spring.entities.Teacher;
 import com.elara.spring.services.TeacherService;
 import jakarta.servlet.ServletRequest;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,14 @@ public class TeacherController {
         model.addAttribute("teachers", teacherService.listTeachers());
         return "teachers";
     }
+
+    @GetMapping("/create-teacher")
+    public String showCreateForm(Model model) {
+        model.addAttribute("title", "Agregar Maestro");
+        model.addAttribute("teacher", new Teacher()); //empty teacher for thymeleaf form
+        return "form";
+    }
+
 
 
 }

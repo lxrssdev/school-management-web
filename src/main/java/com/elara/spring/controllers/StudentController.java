@@ -42,7 +42,7 @@ public class StudentController {
 
     @GetMapping("/create-student")
     public String showCreateForm(Model model) {
-        model.addAttribute("title", "Create Student");
+        model.addAttribute("title", "Agregar Estudiante");
         model.addAttribute("student", new Student()); //empty object for thymeleaf form
         return "form";
     }
