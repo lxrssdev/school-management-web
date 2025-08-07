@@ -34,21 +34,21 @@ public class TeacherController {
     public String showCreateForm(Model model) {
         model.addAttribute("title", "Agregar Maestro");
         model.addAttribute("teacher", new Teacher()); //empty teacher for thymeleaf form
-        return "form";
+        return "formTeacher";
     }
 
     @GetMapping("/form-create")
     public String formCreate(Model model){
         model.addAttribute("title", "Formulario | Creación de maestros!");
         model.addAttribute("teacher", new Teacher());
-        return "form";
+        return "formTeacher";
     }
 
     @PostMapping("/teachers")
     public String processFormCreate(@Valid Teacher teacher, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
         if(result.hasErrors()) {
             model.addAttribute("title", "Formulario en validación | Completa los campos");
-            return "form";
+            return "formTeacher";
         }
         String message = (teacher.getId() != null && teacher.getId() > 0)
                 ? "Maestro "+ teacher.getFullName() + " actualizado correctamente"
