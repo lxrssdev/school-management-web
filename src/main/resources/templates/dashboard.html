@@ -17,6 +17,7 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -59,7 +60,7 @@
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                        id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://via.placeholder.com/30" alt="Perfil" width="30" height="30" class="rounded-circle me-2">
-                        <span th:text="${#authentication.principal.username}">Usuario</span>
+                        <span>Usuario</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Perfil</a></li>
@@ -76,8 +77,6 @@
         </div>
     </div>
 </nav>
-
-<div class="d-flex">
 <div class="d-flex">
     <!-- Sidebar -->
     <nav class="sidebar p-3" style="width: 250px;">

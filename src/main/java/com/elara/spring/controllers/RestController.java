@@ -15,11 +15,11 @@ import java.util.Optional;
 @Controller()
 @RequestMapping("/dashboard")
 @SessionAttributes({"student"})
-public class StudentController {
+public class RestController {
 
     private final StudentService service;
 
-    public StudentController(StudentService service) {
+    public RestController(StudentService service) {
         this.service = service;
     }
 
