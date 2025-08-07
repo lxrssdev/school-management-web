@@ -29,6 +29,14 @@ public class TeacherController {
         return "teachers";
     }
 
+
+    @GetMapping("/create-teacher")
+    public String showCreateForm(Model model) {
+        model.addAttribute("title", "Agregar Maestro");
+        model.addAttribute("teacher", new Teacher()); //empty teacher for thymeleaf form
+        return "form";
+    }
+
     @GetMapping("/form-create")
     public String formCreate(Model model){
         model.addAttribute("title", "Formulario | Creación de maestros!");
