@@ -11,7 +11,6 @@
 <body>
 <div class="container my-4">
   <h3 th:text="${title}"></h3>
-  <a th:href="@{/dashboard/teachers}" th:text="'Volver'" class="btn btn-secondary"></a>
 
   <form th:action="@{/dashboard/teachers}" method="post" th:object="${teacher}">
     <!-- Name -->
@@ -51,9 +50,11 @@
     </div>
     <div class="row mb-3">
       <div>
-        <input type="submit" th:value="${(teacher.id != null && teacher.id > 0) ? 'Actualizar maestro' : 'Crear empleado'}"
+        <input type="submit" th:value="${(teacher.id != null && teacher.id > 0) ? 'Actualizar maestro' : 'Agregar maestro'}"
                class="btn btn-success">
+        <a th:href="@{/dashboard/teachers}" th:text="'Volver'" class="btn btn-secondary"></a>
       </div>
+
     </div>
   </form>
 </div>

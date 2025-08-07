@@ -44,7 +44,7 @@ public class TeacherController {
         return "form";
     }
 
-    @PostMapping("/dashboard/teachers")
+    @PostMapping("/teachers")
     public String processFormCreate(@Valid Teacher teacher, BindingResult result, Model model, RedirectAttributes redirect, SessionStatus status) {
         if(result.hasErrors()) {
             model.addAttribute("title", "Formulario en validación | Completa los campos");
