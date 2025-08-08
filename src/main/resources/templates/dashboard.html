@@ -1,389 +1,419 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title th:text="${title}">Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        :root {
-        /* Modo oscuro (valores por defecto) */
-            --bg-color: #353434;
-            --sidebar-color: #2c3e50;
-            --card-color: #233647;
-            --card-shadow: rgba(0, 68, 255, 0.39);
-            --text-color: #ffffff;
-            --header-color: #ffffff;
-            --table-header: #343a40;
-            --table-bg: #343a40;
-            --table-border: #454d55;
-            --hover-color: #3498db;
-            --active-color: #3498db;
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FONT FAMILY INTER -->
 
-        [data-theme="light"] {
-            /* Modo claro */
-            --bg-color: #f8f9fa;
-            --sidebar-color: #3498db;
-            --card-color: #ffffff;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --text-color: #212529;
-            --header-color: #2c3e50;
-            --table-header: #3498db;
-            --table-bg: #ffffff;
-            --table-border: #dee2e6;
-            --hover-color: #1d6fa5;
-            --active-color: #1d6fa5;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease;
-        }
+    <!-- CDN BOOTSTRAP -->
 
-        .sidebar {
-            background-color: var(--sidebar-color);
-            min-height: 100vh;
-        }
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
-        .sidebar .nav-link {
-            color: var(--text-color);
-            margin-bottom: 5px;
-        }
-
-        .sidebar .nav-link.active, .sidebar .nav-link:hover {
-            background-color: var(--active-color);
-            color: white;
-        }
-
-        .card {
-            background-color: var(--card-color);
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px var(--card-shadow);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-            background-color: var(--table-header);
-            color: white;
-        }
-
-        /* Estilos para tablas */
-        .table {
-            color: var(--text-color);
-            background-color: var(--table-bg);
-        }
-
-        .table-dark {
-            --bs-table-bg: var(--table-header);
-            --bs-table-striped-bg: var(--sidebar-color);
-            --bs-table-hover-bg: var(--hover-color);
-            border-color: var(--table-border);
-        }
-
-        .navbar-brand, .nav-link, .dropdown-item {
-            transition: color 0.3s ease;
-        }
-
-        /* Estilos para el dropdown con hover */
-.dropdown-hover:hover .dropdown-hover-menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    visibility: visible;
-}
-
-.dropdown-hover-menu {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    opacity: 0;
-    transform: translateY(-10px);
-    visibility: hidden;
-    transition: all 0.3s ease;
-    min-width: 200px;
-    background-color: var(--sidebar-color);
-    border: 1px solid var(--active-color);
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    margin-left: 150px;
-}
-
-/* Estilos para los items del dropdown */
-.dropdown-hover-menu .dropdown-header {
-    color: var(--active-color);
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--active-color);
-}
-
-.dropdown-hover-menu .dropdown-item {
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    transition: all 0.2s;
-}
-
-.dropdown-hover-menu .dropdown-item:hover {
-    background-color: var(--active-color);
-    color: white;
-    padding-left: 1.2rem;
-}
-
-/* Mantener consistencia con el tema */
-[data-theme="light"] .dropdown-hover-menu {
-    background-color: white;
-    border-color: var(--table-border);
-}
-
-[data-theme="light"] .dropdown-hover-menu .dropdown-item {
-    color: var(--text-color);
-}
-
-[data-theme="light"] .dropdown-hover-menu .dropdown-item:hover {
-    background-color: var(--hover-color);
-}
-    </style>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-    <div class="container-fluid">
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="styles/dashboard-style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid gap-3">
         <a class="navbar-brand" href="#">
-            <i class="bi bi-mortarboard-fill"></i> SIGE
+          <i class="bi bi-mortarboard-fill"></i> SIGE
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">
-                        <i class="bi bi-house-door"></i> Inicio
-                    </a>
+          <ul class="navbar-nav gap-2 me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex gap-2 active layout-nav-icons"
+                aria-current="page"
+                th:href="@{/dashboard}"
+              >
+                <i class="bi bi-house-door"></i> Inicio
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle d-flex gap-2 align-items-center"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-people-fill"></i> Administración
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students}"
+                    >Estudiantes</a
+                  >
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-people-fill"></i> Administración
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students}">Estudiantes</a></li>
-                        <li><a class="dropdown-item" href="#" th:href="@{/profesores}">Profesores</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#" th:href="@{/usuarios}">Usuarios del Sistema</a></li>
-                    </ul>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/profesores}"
+                    >Profesores</a
+                  >
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/asignaturas}">
-                        <i class="bi bi-book"></i> Asignaturas
-                    </a>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/usuarios}"
+                    >Usuarios del Sistema</a
+                  >
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="@{/calificaciones}">
-                        <i class="bi bi-clipboard-data"></i> Calificaciones
-                    </a>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex gap-2"
+                href="#"
+                th:href="@{/asignaturas}"
+              >
+                <i class="bi bi-book"></i> Asignaturas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex gap-2"
+                href="#"
+                th:href="@{/calificaciones}"
+              >
+                <i class="bi bi-clipboard-data"></i> Calificaciones
+              </a>
+            </li>
+          </ul>
+          <div
+            class="d-flex align-items-center"
+            aria-label="Menu del perfil del usuario"
+          >
+            <div class="dropdown">
+              <a
+                href="#"
+                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="images/profile-icon-test.jpg"
+                  alt="Perfil"
+                  width="30"
+                  height="30"
+                  class="rounded-circle me-2"
+                />
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                <li>
+                  <span class="dropdown-item username">Usuario</span>
                 </li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <div class="dropdown me-3">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                       id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://via.placeholder.com/30" alt="Perfil" width="30" height="30" class="rounded-circle me-2">
-                        <span>Usuario</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Configuración</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form th:action="@{/logout}" method="post">
-                                <button class="dropdown-item" type="submit">Cerrar sesión</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                <hr class="dropdown-divider" />
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <hr class="dropdown-divider" />
+                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                <hr class="dropdown-divider" />
+                <li>
+                  <div
+                    class="form-check form-switch ms-3 me-2 d-flex align-items-center justify-content-between"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="darkModeSwitch"
+                    />
+                    <label
+                      class="form-check-label text-white"
+                      for="darkModeSwitch"
+                    >
+                      <i class="bi bi-moon-stars"></i>
+                    </label>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <form th:action="@{/logout}" method="post">
+                    <button class="dropdown-item" type="submit">
+                      Cerrar sesión
+                    </button>
+                  </form>
+                </li>
+              </ul>
             </div>
-            <div class=" form-check form-switch ms-3 me-2 d-flex align-items-center">
-                <input class="form-check-input" type="checkbox" id="darkModeSwitch" >
-                <label class="form-check-label text-white ms-2" for="darkModeSwitch">
-                    <i class="bi bi-moon-stars"></i>
-                </label>
-            </div>
+          </div>
         </div>
-    </div>
-</nav>
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav class="sidebar p-3" style="width: 250px;">
-        <h4 class="text-white text-center mb-4">SIGE</h4>
-        <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link active" th:href="@{/dashboard}"><i class="bi bi-house"></i> Inicio</a></li>
-            <li class="nav-item dropdown-hover position-relative">
-        <a class="nav-link" href="#" th:href="@{/dashboard/students}">
-            <i class="bi bi-people"></i> Estudiantes
-        </a>
-        <ul class="dropdown-menu dropdown-hover-menu">
-            <li><h6 class="dropdown-header">Grupos</h6></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students/group/101}">Grupo 101</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students/group/102}">Grupo 102</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students/group/103}">Grupo 103</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students/group/104}">Grupo 104</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students/group/105}">Grupo 105</a></li>
-        </ul>
-    </li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/dashboard/teachers}"><i class="bi bi-person-badge"></i> Profesores</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/dashboard/subjects}"><i class="bi bi-book"></i> Asignaturas</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/dashboard/grades}"><i class="bi bi-clipboard-data"></i> Calificaciones</a></li>
-            <li class="nav-item mt-4"><form th:action="@{/logout}" method="post"><button class="btn btn-sm btn-danger w-100">Cerrar sesión</button></form></li>
-        </ul>
+      </div>
     </nav>
 
-    <!-- Contenido principal -->
-    <main class="main-content flex-grow-1">
-        <h1 class="mb-4"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h1>
+    <div class="container-dashboard">
+      <!-- Sidebar -->
+      <aside class="aside" id="aside">
+        <nav class="sidebar p-3">
+          <!-- Image Profile Sidebar -->
+          <div class="image-profile-sidebar">
+            <img
+              src="images/profile-icon-test.jpg"
+              alt="Foto de perfil del Usuario"
+              width="500"
+              height="500"
+            />
+            <p class="username">Usuario</p>
+          </div>
+
+          <ul class="nav flex-column gap-3">
+            <li class="nav-item">
+              <a class="nav-link active" th:href="@{/dashboard}"
+                ><i class="bi bi-house"></i> Inicio</a
+              >
+            </li>
+            <li class="nav-item dropdown-hover position-relative">
+              <a class="nav-link" href="#" th:href="@{/dashboard/students}">
+                <i class="bi bi-people"></i> Estudiantes
+              </a>
+              <ul class="dropdown-menu dropdown-hover-menu">
+                <li><p class="dropdown-header">Grupos</p></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students/group/101}"
+                    >Grupo 101</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students/group/102}"
+                    >Grupo 102</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students/group/103}"
+                    >Grupo 103</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students/group/104}"
+                    >Grupo 104</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students/group/105}"
+                    >Grupo 105</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/dashboard/teachers}"
+                ><i class="bi bi-person-badge"></i> Profesores</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/dashboard/subjects}"
+                ><i class="bi bi-book"></i> Asignaturas</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/dashboard/grades}"
+                ><i class="bi bi-clipboard-data"></i> Calificaciones</a
+              >
+            </li>
+            <li class="nav-item mt-4">
+              <form th:action="@{/logout}" method="post">
+                <button class="btn-logout">Cerrar sesión</button>
+              </form>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Contenido principal -->
+      <main class="main-content flex-grow-1">
+        <div class="dashboard-title">
+          <h1>
+            <img
+              src="images/dashboard.png"
+              alt="Logo del Dashboard"
+              width="512"
+              height="512"
+            />
+            Dashboard
+          </h1>
+          <p>¡Bienvenido! Username.</p>
+        </div>
 
         <!-- Resumen -->
         <div class="row mb-4">
-            <div class="col-md-3 mb-3">
-                <div class="card p-3 ">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6>Estudiantes</h6>
-                            <h4 th:text="${totalEstudiantes}">0</h4>
-                        </div>
-                        <i class="bi bi-people-fill fs-1 text-info"></i>
-                    </div>
+          <div class="col-md-3 mb-3" aria-label="Total de Estudiantes">
+            <div class="card p-3">
+              <div class="description-total-resumen">
+                <div>
+                  <h2>Estudiantes</h2>
+                  <h3 th:text="${totalEstudiantes}">0</h3>
                 </div>
+                <i class="bi bi-people-fill fs-1 text-info"></i>
+              </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <div class="card p-3 ">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6>Profesores</h6>
-                            <h4 th:text="${totalProfesores}">0</h4>
-                        </div>
-                        <i class="bi bi-person-badge fs-1 text-success"></i>
-                    </div>
+          </div>
+          <div class="col-md-3 mb-3" aria-label="Total de Profesores">
+            <div class="card p-3">
+              <div class="description-total-resumen">
+                <div>
+                  <h2>Profesores</h2>
+                  <h3 th:text="${totalProfesores}">0</h3>
                 </div>
+                <i class="bi bi-person-badge fs-1 text-success"></i>
+              </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <div class="card p-3 ">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6>Asignaturas</h6>
-                            <h4 th:text="${totalAsignaturas}">0</h4>
-                        </div>
-                        <i class="bi bi-book fs-1 text-primary"></i>
-                    </div>
+          </div>
+          <div class="col-md-3 mb-3" aria-label="Total de Asignaturas">
+            <div class="card p-3">
+              <div class="description-total-resumen">
+                <div>
+                  <h2>Asignaturas</h2>
+                  <h3 th:text="${totalAsignaturas}">0</h3>
                 </div>
+                <i class="bi bi-book fs-1 text-primary"></i>
+              </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <div class="card p-3 ">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h6>Calificaciones</h6>
-                            <h4 th:text="${totalCalificaciones}">0</h4>
-                        </div>
-                        <i class="bi bi-clipboard-data fs-1 text-warning"></i>
-                    </div>
+          </div>
+          <div class="col-md-3 mb-3" aria-label="Total de Calificaciones">
+            <div class="card p-3">
+              <div class="description-total-resumen">
+                <div>
+                  <h2>Calificaciones</h2>
+                  <h3 th:text="${totalCalificaciones}">0</h3>
                 </div>
+                <i class="bi bi-clipboard-data fs-1 text-warning"></i>
+              </div>
             </div>
+          </div>
         </div>
 
         <!-- Últimas calificaciones -->
-        <div class="card mb-4">
-            <div class="card-header text-white bg-dark">Últimas Calificaciones</div>
-            <div class="card-body table-responsive">
-                <table class="table table-dark table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Estudiante</th>
-                        <th>Asignatura</th>
-                        <th>Nota</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="c : ${ultimasCalificaciones}">
-                        <td th:text="${c.estudiante.fullName}">Nombre</td>
-                        <td th:text="${c.asignatura.nombre}">Asignatura</td>
-                        <td th:text="${c.nota}">0.0</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+
+        <div class="card mb-4" aria-label="Tabla de ultimas calificaciones">
+          <div class="card-header text-white bg-dark">
+            Últimas Calificaciones
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-dark table-bordered table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Estudiante</th>
+                  <th scope="col">Asignatura</th>
+                  <th scope="col">Nota</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="c : ${ultimasCalificaciones}">
+                  <td th:text="${c.estudiante.fullName}">Nombre</td>
+                  <td th:text="${c.asignatura.nombre}">Asignatura</td>
+                  <td th:text="${c.nota}">0.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- Estudiantes destacados -->
-        <div class="card">
-            <div class="card-header text-white bg-dark">Estudiantes Destacados</div>
-            <div class="card-body table-responsive">
-                <table class="table table-dark table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Grado</th>
-                        <th>Promedio</th>
-                        <th>Asignatura Destacada</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="e : ${estudiantesDestacados}">
-                        <td th:text="${e.fullName}">Estudiante</td>
-                        <td th:text="${e.grado}">10°</td>
-                        <td th:text="${e.promedio}">9.5</td>
-                        <td th:text="${e.asignaturaDestacada}">Matemáticas</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card" aria-label="Tabla de estudiantes Destacados">
+          <div class="card-header text-white bg-dark">
+            Estudiantes Destacados
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-dark table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Grado</th>
+                  <th scope="col">Promedio</th>
+                  <th scope="col">Asignatura Destacada</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="e : ${estudiantesDestacados}">
+                  <td th:text="${e.fullName}">Estudiante</td>
+                  <td th:text="${e.grado}">10°</td>
+                  <td th:text="${e.promedio}">9.5</td>
+                  <td th:text="${e.asignaturaDestacada}">Matemáticas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </main>
-</div>
+      </main>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const darkModeSwitch = document.getElementById('darkModeSwitch');
-    
-    // Verificar preferencia del sistema o guardada
-    const savedTheme = localStorage.getItem('theme') || 
-                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    // Aplicar tema guardado
-    if (savedTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        darkModeSwitch.checked = true;
-    }
-    
-    // Cambiar icono según el tema
-    updateSwitchIcon(darkModeSwitch.checked);
-    
-    // Escuchar cambios en el interruptor
-    darkModeSwitch.addEventListener('change', function() {
-        if (this.checked) {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-        } else {
-            document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'dark');
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const darkModeSwitch = document.getElementById("darkModeSwitch");
+
+        // Verificar preferencia del sistema o guardada
+        const savedTheme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+
+        // Aplicar tema guardado
+        if (savedTheme === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+          darkModeSwitch.checked = true;
         }
-        updateSwitchIcon(this.checked);
-    });
-    
-    function updateSwitchIcon(isLight) {
-        const icon = darkModeSwitch.nextElementSibling.querySelector('i');
-        icon.className = isLight ? 'bi bi-sun' : 'bi bi-moon-stars';
-    }
-});
-</script>
-</body>
+
+        // Cambiar icono según el tema
+        updateSwitchIcon(darkModeSwitch.checked);
+
+        // Escuchar cambios en el interruptor
+        darkModeSwitch.addEventListener("change", function () {
+          if (this.checked) {
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+          } else {
+            document.documentElement.removeAttribute("data-theme");
+            localStorage.setItem("theme", "dark");
+          }
+          updateSwitchIcon(this.checked);
+        });
+
+        function updateSwitchIcon(isLight) {
+          const icon = darkModeSwitch.nextElementSibling.querySelector("i");
+          icon.className = isLight ? "bi bi-sun" : "bi bi-moon-stars";
+        }
+      });
+    </script>
+  </body>
 </html>
