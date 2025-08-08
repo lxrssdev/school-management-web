@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/dashboard")
 @SessionAttributes({"teacher"})
@@ -38,9 +40,10 @@ public class TeacherController {
     }
 
     @GetMapping("/form-create")
-    public String formCreate(Model model){
+    public String formCreate(Model model, RedirectAttributes redirect) {
         model.addAttribute("title", "Formulario | Creación de maestros!");
         model.addAttribute("teacher", new Teacher());
+        redirect.addFlashAttribute("success", "Maestro agregado correctamente al sistema");
         return "formTeacher";
     }
 
@@ -59,5 +62,28 @@ public class TeacherController {
         return "redirect:/dashboard/teachers";
     }
 
+    @GetMapping("/edit-teacher/{id}")
+    public String showEditForm(@PathVariable Long id,Model model, RedirectAttributes redirect) {
+        Optional<Teacher> teacher = teacherService.findById(id);
+        if(teacher.isPresent()) {
+            model.addAttribute("title", "Formulario | Editar Maestro");
+            model.addAttribute("teacher", teacher.get());
+            redirect.addFlashAttribute("success", "Maestro " + teacher.get().getFullName() + " editado correctamente");
+            return "formTeacher";
+        }else{
+            return "redirect:/dashboard/teachers";
+        }
+    }
+    @GetMapping("/delete-teacher/{id}")
+    public String deleteTeacher(@PathVariable Long id,RedirectAttributes redirect) {
+        Optional<Teacher> teacher = teacherService.findById(id);
+        if(teacher.isPresent()) {
+            teacherService.deleteById(id);
+            redirect.addFlashAttribute("success", "Maestro eliminado correctamente del sistema");
+        }else{
+            redirect.addFlashAttribute("error", "Maestro no encontrado en el sistema");
+        }
+        return "redirect:/dashboard/teachers";
+    }
 
 }

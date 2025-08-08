@@ -96,8 +96,8 @@
         <th th:text="${teacher.fullName}"></th>
         <th th:text="${teacher.email}"></th>
         <th th:text="${teacher.subject}"></th>
-        <th><a class="btn btn-warning" th:href="@{/dashboard/form-update/} + ${teacher.id} ">Editar</a></th>
-        <th><a class="btn btn-danger" th:href="@{/dashboard/form-delete/} + ${teacher.id}"
+        <th><a class="btn btn-warning" th:href="@{/dashboard/edit-teacher/} + ${teacher.id} ">Editar</a></th>
+        <th><a class="btn btn-danger" th:href="@{/dashboard/delete-teacher/} + ${teacher.id}"
                onclick="return confirm('Estas seguro de querer eliminar un maestro?')">Eliminar</a></th>
       </tr>
     </tbody>
