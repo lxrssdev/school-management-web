@@ -23,20 +23,19 @@ public class Teacher {
     private String lastname;
 
     @NotBlank(message = "El campo \"Correo\" no puede estar vacío!")
-    @Email
+    @Email(message = "Correo invalido")
     private String email;
 
-    @NotBlank(message = "El campo \"Materia\" no puede estar vacío!")
+    /*@NotBlank(message = "El campo \"Materia\" no puede estar vacío!")
     @Size(min=4, max=100, message = "La materia debe estar entre 4 y 100 caracteres")
-    private String subject;
+    private String subject;*/
 
     public Teacher() {}
 
-    public Teacher(String name, String lastname, String email, String subject) {
+    public Teacher(String name, String lastname, String email) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
-        this.subject = subject;
     }
 
     public Long getId() {
@@ -71,13 +70,13 @@ public class Teacher {
         this.email = email;
     }
 
-    public String getSubject() {
+    /*public String getSubject() {
         return subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
-    }
+    }*/
 
     public String getFullName(){
         return name + " " + lastname;
