@@ -30,8 +30,8 @@ public class TeacherServiceImpl implements TeacherService {
     }
     @Transactional
     @Override
-    public Teacher save(Teacher teacher) {
-        return teacherRepo.save(teacher);
+    public void save(Teacher teacher) {
+        teacherRepo.save(teacher);
     }
 
     @Transactional

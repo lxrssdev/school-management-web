@@ -39,15 +39,8 @@
               class="form-text text-danger"></span>
       </div>
     </div>
-    <!-- Subject -->
-    <div class="row mb-3">
-      <label for="subject" class="col-sm-3 col-form-label">Materia:</label>
-      <div class="col-sm-8">
-        <input type="text" th:field="*{subject}" id="subject" class="form-control">
-        <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"
-              class="form-text text-danger"></span>
-      </div>
-    </div>
+
+
     <div class="row mb-3">
       <div>
         <input type="submit" th:value="${(teacher.id != null && teacher.id > 0) ? 'Actualizar maestro' : 'Agregar maestro'}"
