@@ -1,105 +1,225 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title th:text="${title}"></title>
-  <!-- bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+    <!-- FONT FAMILY POPPINS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <i class="bi bi-mortarboard-fill"></i>SIGE
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">
-            <i class="bi bi-house-door"></i>Volver a inicio
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            <i class="bi bi-people-fill"></i>Administración
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" th:href="@{/dashboard/students}">Estudiantes</a></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/profesores}">Profesores</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" th:href="@{/usuarios}">Usuarios del Sistema</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/asignaturas}">
-            <i class="bi bi-book"></i> Asignaturas
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/calificaciones}">
-            <i class="bi bi-clipboard-data"></i> Calificaciones
-          </a>
-        </li>
-      </ul>
-      <div class="d-flex align-items-center">
-        <div class="dropdown me-3">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-             id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://via.placeholder.com/30" alt="Perfil" width="30" height="30" class="rounded-circle me-2">
-            <span>Usuario</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
-            <li><a class="dropdown-item" href="#">Configuración</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <form th:action="@{/logout}" method="post">
-                <button class="dropdown-item" type="submit">Cerrar sesión</button>
-              </form>
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="assets/styles/teachers-style.css" />
+
+    <!-- DARK OR LIGHT MODE JAVASCRIPT -->
+    <script src="assets/scripts/dark-light-mode.js" defer></script>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark bg-dark shadow-sm p-2">
+      <div class="container-fluid">
+        <!-- LOGO -->
+        <a class="navbar-brand" href="#">
+          <i class="bi bi-mortarboard-fill"></i> SIGE
+        </a>
+        <!-- OPEN NAVBAR -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- OPEN MENU -->
+        <div class="collapse navbar-collapse py-3" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                th:href="@{/dashboard}"
+              >
+                <i class="bi bi-house-door"></i>Volver a inicio
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+              >
+                <i class="bi bi-people-fill"></i>Administración
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    th:href="@{/dashboard/students}"
+                    >Estudiantes</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/profesores}"
+                    >Profesores</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/usuarios}"
+                    >Usuarios del Sistema</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/asignaturas}">
+                <i class="bi bi-book"></i> Asignaturas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/calificaciones}">
+                <i class="bi bi-clipboard-data"></i> Calificaciones
+              </a>
             </li>
           </ul>
+          <div class="d-flex align-items-center">
+            <div class="dropdown me-3">
+              <a
+                href="#"
+                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="assets/images/profile-icon-test.jpg"
+                  alt="Perfil"
+                  width="30"
+                  height="30"
+                  class="rounded-circle me-2"
+                />
+                <p class="mb-0">Username</p>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <!-- DARK OR LIGHT MODE -->
+                <!-- <li>
+                  <div
+                    class="form-check form-switch ms-3 me-2 d-flex align-items-center justify-content-between"
+                    aria-label="Interruptor de Modo oscuro o claro"
+                  >
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="darkModeSwitch"
+                    />
+                    <label
+                      class="form-check-label text-white"
+                      for="darkModeSwitch"
+                    >
+                      <i class="bi bi-moon-stars"></i>
+                    </label>
+                  </div> -->
+                <!-- </li>
+                <li><hr class="dropdown-divider" /></li> -->
+                <li>
+                  <!-- LOGOUT BUTTON -->
+                  <form th:action="@{/logout}" method="post">
+                    <button class="dropdown-item" type="submit">
+                      Cerrar sesión
+                    </button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div class=" form-check form-switch ms-3 me-2 d-flex align-items-center">
-        <input class="form-check-input" type="checkbox" id="darkModeSwitch" >
-        <label class="form-check-label text-white ms-2" for="darkModeSwitch">
-          <i class="bi bi-moon-stars"></i>
-        </label>
-      </div>
-    </div>
-  </div>
-</nav>
+    </nav>
 
-<div class="container my-4">
-  <h3 th:text="${title}"></h3>
-  <a th:href="@{/dashboard/form-create}" th:text="'Agregar maestro nuevo'" class="btn btn-primary"></a>
-  <div th:text="'Parece que no hay maestros en la base de datos! 😥'" th:if="${#lists.isEmpty(teachers)}"></div>
-  <table class="table table-hover table-striped" th:if="${not #lists.isEmpty(teachers)}">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="teacher : ${teachers}">
-        <th th:text="${teacher.id}"></th>
-        <th th:text="${teacher.fullName}"></th>
-        <th th:text="${teacher.email}"></th>
-        <th><a class="btn btn-warning" th:href="@{/dashboard/edit-teacher/} + ${teacher.id} ">Editar</a></th>
-        <th><a class="btn btn-danger" th:href="@{/dashboard/delete-teacher/} + ${teacher.id}"
-               onclick="return confirm('Estas seguro de querer eliminar un maestro?')">Eliminar</a></th>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</body>
+    <!-- MAIN CONTENT -->
+
+    <main>
+      <section>
+        <h1 th:text="${title}"></h1>
+        <a
+          th:href="@{/dashboard/form-create}"
+          th:text="'Agregar maestro nuevo'"
+          class="btn btn-primary"
+          >Agregar maestro nuevo</a
+        >
+        <div
+          th:text="'Parece que no hay maestros en la base de datos! 😥'"
+          th:if="${#lists.isEmpty(teachers)}"
+        ></div>
+        <div class="container-table">
+          <table
+            class="table table-hover table-striped"
+            th:if="${not #lists.isEmpty(teachers)}"
+            id="table"
+          >
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="teacher : ${teachers}">
+                <td th:text="${teacher.id}"></td>
+                <td th:text="${teacher.fullName}"></td>
+                <td th:text="${teacher.email}"></td>
+                <td>
+                  <a
+                    class="btn btn-edit"
+                    th:href="@{/dashboard/edit-teacher/} + ${teacher.id} "
+                    >Editar
+                  </a>
+                </td>
+                <td>
+                  <a
+                    class="btn btn-danger"
+                    th:href="@{/dashboard/delete-teacher/} + ${teacher.id}"
+                    onclick="return confirm('⚠️ Estas seguro de querer eliminar un maestro?')"
+                    >Eliminar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
