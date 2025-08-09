@@ -24,8 +24,13 @@
       rel="stylesheet"
     />
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- CSS STYLES -->
-    <link rel="stylesheet" href="styles/dashboard-style.css" />
+    <link rel="stylesheet" href="assets/styles/dashboard-style.css" />
+
+    <!-- DARK OR LIGHT MODE JAVASCRIPT -->
+    <script src="assets/scripts/dark-light-mode.js" defer></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
@@ -62,13 +67,56 @@
                 <i class="bi bi-people-fill"></i> Administración
               </a>
               <ul class="dropdown-menu">
-                <li>
+                <li class="nav-item dropdown-hover position-relative">
                   <a
                     class="dropdown-item"
                     href="#"
                     th:href="@{/dashboard/students}"
-                    >Estudiantes</a
-                  >
+                    >Estudiantes
+                  </a>
+                  <ul class="dropdown-menu dropdown-hover-menu">
+                    <li><p class="dropdown-header">Grupos</p></li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        th:href="@{/dashboard/students/group/101}"
+                        >Grupo 101</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        th:href="@{/dashboard/students/group/102}"
+                        >Grupo 102</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        th:href="@{/dashboard/students/group/103}"
+                        >Grupo 103</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        th:href="@{/dashboard/students/group/104}"
+                        >Grupo 104</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        th:href="@{/dashboard/students/group/105}"
+                        >Grupo 105</a
+                      >
+                    </li>
+                  </ul>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
@@ -116,7 +164,7 @@
                 aria-expanded="false"
               >
                 <img
-                  src="images/profile-icon-test.jpg"
+                  src="assets/images/profile-icon-test.jpg"
                   alt="Perfil"
                   width="30"
                   height="30"
@@ -171,7 +219,7 @@
           <!-- Image Profile Sidebar -->
           <div class="image-profile-sidebar">
             <img
-              src="images/profile-icon-test.jpg"
+              src="assets/images/profile-icon-test.jpg"
               alt="Foto de perfil del Usuario"
               width="500"
               height="500"
@@ -262,7 +310,7 @@
         <div class="dashboard-title">
           <h1>
             <img
-              src="images/dashboard.png"
+              src="assets/images/dashboard.png"
               alt="Logo del Dashboard"
               width="512"
               height="512"
@@ -374,46 +422,5 @@
         </div>
       </main>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const darkModeSwitch = document.getElementById("darkModeSwitch");
-
-        // Verificar preferencia del sistema o guardada
-        const savedTheme =
-          localStorage.getItem("theme") ||
-          (window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light");
-
-        // Aplicar tema guardado
-        if (savedTheme === "light") {
-          document.documentElement.setAttribute("data-theme", "light");
-          darkModeSwitch.checked = true;
-        }
-
-        // Cambiar icono según el tema
-        updateSwitchIcon(darkModeSwitch.checked);
-
-        // Escuchar cambios en el interruptor
-        darkModeSwitch.addEventListener("change", function () {
-          if (this.checked) {
-            document.documentElement.setAttribute("data-theme", "light");
-            localStorage.setItem("theme", "light");
-          } else {
-            document.documentElement.removeAttribute("data-theme");
-            localStorage.setItem("theme", "dark");
-          }
-          updateSwitchIcon(this.checked);
-        });
-
-        function updateSwitchIcon(isLight) {
-          const icon = darkModeSwitch.nextElementSibling.querySelector("i");
-          icon.className = isLight ? "bi bi-sun" : "bi bi-moon-stars";
-        }
-      });
-    </script>
   </body>
 </html>
