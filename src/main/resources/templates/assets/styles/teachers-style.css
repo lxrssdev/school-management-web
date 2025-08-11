@@ -73,7 +73,18 @@ body {
   left: 0;
 }
 /* MAIN CONTENT */
-
+.back-button {
+  margin: 0.5rem 0 0 0.5rem;
+  color: #0a0a0a;
+  display: inline-block;
+  padding: 0.5rem;
+}
+.back-button:hover {
+  color: #2987c1;
+}
+.back-button a {
+  text-decoration: underline !important;
+}
 section {
   padding: 1rem;
   display: flex;
@@ -110,6 +121,7 @@ h1 {
 .btn-danger:hover {
   background-color: #dc2626 !important;
 }
+/* TABLE */
 .container-table {
   width: 100%;
   height: calc(100vh - 350px);
@@ -138,11 +150,6 @@ table {
   overflow: hidden;
   padding: 1rem 0;
 }
-/* ICONS FLATICONS */
-.fi {
-  display: flex;
-}
-
 /* MEDIA QUERIES (RESPONSIVE) */
 @media (min-width: 768px) {
   .container-table {
