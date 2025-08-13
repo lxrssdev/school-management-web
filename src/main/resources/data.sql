@@ -1,5 +1,4 @@
-
--- Teachers
+-- Insertar Profesores
 INSERT INTO teachers (lastname, name, email) VALUES ('González', 'Ana', 'ana.gonzalez@email.com');
 INSERT INTO teachers (lastname, name, email) VALUES ('Martínez', 'Carlos', 'carlos.martinez@email.com');
 INSERT INTO teachers (lastname, name, email) VALUES ('Ramírez', 'Luisa', 'luisa.ramirez@email.com');
@@ -10,7 +9,8 @@ INSERT INTO teachers (lastname, name, email) VALUES ('Vega', 'María', 'maria.ve
 INSERT INTO teachers (lastname, name, email) VALUES ('Ortiz', 'David', 'david.ortiz@email.com');
 INSERT INTO teachers (lastname, name, email) VALUES ('López', 'Carla', 'carla.lopez@email.com');
 INSERT INTO teachers (lastname, name, email) VALUES ('Ruiz', 'Fernando', 'fernando.ruiz@email.com');
--- Materias
+
+-- Insertar Materias (asegúrate que teacher_id coincida con los profesores insertados)
 INSERT INTO subjects (semester, teacher_id, name, area) VALUES (1, 1, 'Matemáticas I', 'Matemáticas');
 INSERT INTO subjects (semester, teacher_id, name, area) VALUES (2, 2, 'Física I', 'Ciencias');
 INSERT INTO subjects (semester, teacher_id, name, area) VALUES (3, 3, 'Química I', 'Ciencias');
